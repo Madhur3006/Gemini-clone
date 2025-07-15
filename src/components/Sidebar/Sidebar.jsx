@@ -1,11 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import './Sidebar.css';
 import {assets} from '../../assets/assets';
-import {Context} from '../../context/Context';
+import {useChat} from '../../hooks/useChat.js';
+import {useDispatch, useSelector} from 'react-redux';
+import {newChat} from '../../store/chatSlice.js';
 
 const Sidebar = () => {
     const [extended, setExtended] = useState(false);
-    const {onSent, prevPrompts, setRecentPrompt, newChat} = useContext(Context);
+    const {onSent, prevPrompts, setRecentPrompt} = useChat();
+    const dispatch = useDispatch();
 
     const loadPrompt = async (prompt) => {
         setRecentPrompt(prompt)
@@ -17,7 +20,7 @@ const Sidebar = () => {
                 <div className="menu" onClick={() => setExtended(prev => !prev)}>
                     <img src={assets.menu_icon} alt="Menu Icon"/>
                 </div>
-                <div onClick={() => newChat()} className="new-chat">
+                <div onClick={() => dispatch(newChat())} className="new-chat">
                     <img src={assets.plus_icon} alt="Plus Icon"/>
                     <p className={`${extended ? 'block' : 'none'}`}>New Chat</p>
                 </div>

@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
 import App from './App.jsx'
 import './index.css'
-import ContextProvider from "./context/Context.jsx";
+import { store } from './store/store.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ContextProvider>
+  <Provider store={store}>
     <App />
-  </ContextProvider>,
+  </Provider>,
 )

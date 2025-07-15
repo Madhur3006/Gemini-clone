@@ -1,10 +1,10 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './Main.css';
 import {assets} from "../../assets/assets.js";
-import {Context} from "../../context/Context.jsx";
+import {useChat} from "../../hooks/useChat.js";
 
 const Main = () => {
-    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input} = useContext(Context);
+    const {onSent, recentPrompt, showResult, loading, resultData, setInput, input} = useChat();
     const resultRef = useRef(null);
     const [rows, setRows] = useState(1);
 
@@ -32,7 +32,6 @@ const Main = () => {
         <main className="main">
             <nav className="nav">
                 <p>Gemini</p>
-                <img src={assets.user_icon} alt=""/>
             </nav>
             <div className="main-container">
 
@@ -67,7 +66,6 @@ const Main = () => {
                     :
                     <div className='result' ref={resultRef}>
                         <div className="result-title">
-                            <img src={assets.user_icon} alt=""/>
                             <p>{recentPrompt}</p>
                         </div>
                         <div className="result-data">
